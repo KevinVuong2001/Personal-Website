@@ -23,7 +23,7 @@ const Photo = () => {
           className="w-[500px] h-[500px] relative"
         >
           <Image
-            src="/Senior_Picture.jpg"
+            src="/Profile_Pic.jpg"
             priority
             quality={100}
             fill

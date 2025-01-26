@@ -24,6 +24,10 @@ const links = [
         name: "contact",
         path: "/contact",
     },
+    {
+        name: "about me",
+        path: "/aboutme",
+    },
 ]
 
 const Nav = () => {
