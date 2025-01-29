@@ -101,14 +101,39 @@ const education = {
             degree: "Bachelor of Science in Computer Science",
             duration: "September 2019 - June 2024",
             GPA: 3.91,
-            Note: "summa cum laude"
+            note: "summa cum laude",
+            coursework: [
+                "Algorithm and Complexity",
+                "Artificial Intelligence",
+                "Data Structures",
+                "Database Management",
+                "Internet, Web, & Cloud Systems",
+                "Numerical Computation",
+                "Voice Assistants",
+                "Web Development",
+            ],
+            achievements: [
+                `President's List (2019 - 2023)`,
+                `Dean's List (2024)`,
+            ],
         },
         {
             institution: "Parkrose High School",
-            degree: "High School Honors Diploma",
+            degree: "High School Diploma",
             duration: "Septenber 2015 - June 2019",
             GPA: 4.1,
-            Note: ""
+            note: "Honors",
+            coursework: [
+                "Computer Science Principles",
+                "Probability & Stats I & II",
+            ],
+            achievements: [
+                `Honor Roll (2015 - 2019)`,
+                `5A State Champion in Water Polo (2018)`,
+                `State-level in Water Polo (2015 - 2018)`,
+                `State-level in Swimming (2019)`,
+                `State-level in Band/Orchestra (2018 - 2019)`,
+            ]
         }
     ]
 };
@@ -308,7 +333,46 @@ const Resume = () => {
 
                         { /* education */ }
                         <TabsContent value="Education" className="w-full">
-                            Education
+                        <div className="flex flex-col gap-[30px] text-center xl:text-left">
+                                <h3 className="text-4xl font-bold">{education.title}</h3>
+                                <p className="max-w-[700px] text-white/70 mx-auto xl:mx-0">{education.description}</p>
+                                <ScrollArea className="h-[400px]">
+                                    <ul className="grid grid-cols-1 gap-[40px]">
+                                    {education.items.map((item, index) => {
+                                            return(
+                                                <li 
+                                                    key={index} 
+                                                    className="bg-[#202027] py-7 px-10 rounded-xl"
+                                                >
+                                                    <span className="text-xl">{item.institution}</span>
+                                                    <h2 className="text-xl">{item.degree}</h2>
+                                                    <h2 className="text-xl min-h-[40px]">{item.note}</h2>
+                                                    <h3 className="text-accent">{item.duration}</h3>
+                                                    <h3 className="text-accent min-h-[40px]">GPA: {item.GPA}</h3>
+                                                    <div className="text-left">
+                                                        <h3 className="min-h-[40px] font-bold">Coursework:</h3>
+                                                        <ul className='grid grid-cols-2 list-disc pl-6 gap-x-6 marker:text-[#303F9F] '>
+                                                            { /* list of coursework */ }
+                                                            {item.coursework.map((coursework, i) => (
+                                                                <li key={i}>{coursework}</li>
+                                                            ))}
+                                                        </ul>
+                                                    </div>
+                                                    <div className="text-left">
+                                                        <h3 className="min-h-[20px] font-bold">Achievements:</h3>
+                                                        <ul className='list-disc pl-5 marker:text-[#303F9F]'>
+                                                            { /* list of achievements */ }
+                                                            {item.achievements.map((achievement, i) => (
+                                                                <li key={i}>{achievement}</li>
+                                                            ))}
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                            );
+                                        })}
+                                    </ul>
+                                </ScrollArea>
+                        </div>
                         </TabsContent>
 
                         { /* Skills */ }
