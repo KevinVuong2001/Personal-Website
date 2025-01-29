@@ -25,8 +25,8 @@ module.exports = {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
         accent: {
-          DEFAULT: "#00ff99",
-          hover: "#00e187",
+          DEFAULT: "#53FFBA",
+          hover: "#3BA178",
         },
   			card: {
   				DEFAULT: 'hsl(var(--card))',
