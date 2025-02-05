@@ -1,7 +1,7 @@
 "use client"
 
-import { FaPython, FaJs, FaGolang, FaHtml5, FaCss3Alt, FaReact, FaNode, FaDocker, FaGithub, FaLinux, FaUbuntu } from 'react-icons/fa6' 
-import { SiCplusplus, SiCircleci, SiTypescript, SiFlask, SiAmazondynamodb, SiDatadog, SiGoland, SiJira, SiKubernetes, SiGooglecloud, SiMacos, SiRuby, SiGnubash } from 'react-icons/si'
+import { FaPython, FaJs, FaGolang, FaHtml5, FaCss3Alt, FaReact, FaNode, FaDocker, FaGithub, FaLinux, FaUbuntu, FaConfluence, FaTrello, FaChrome } from 'react-icons/fa6' 
+import { SiCplusplus, SiCircleci, SiTypescript, SiFlask, SiAmazondynamodb, SiDatadog, SiGoland, SiJira, SiKubernetes, SiGooglecloud, SiMacos, SiRuby, SiGnubash, SiNextdotjs, SiTailwindcss } from 'react-icons/si'
 import { BiLogoPostgresql, BiLogoVisualStudio} from "react-icons/bi"
 import { RiFirebaseLine } from "react-icons/ri"
 import { TbSql } from "react-icons/tb"
@@ -10,8 +10,7 @@ import { TbSql } from "react-icons/tb"
 const experience = {
     title: 'My Experience',
     description: 
-        `Explore my professional experiences, where I’ve combined technical expertise with innovative problem-solving to deliver impactful solutions.
-        From optimizing patient matching for clinical trials to developing full-stack applications and migrating services to Kubernetes, 
+        `Explore my professional experiences, where I’ve combined technical expertise with innovative problem-solving to deliver impactful solutions, 
         my journey reflects a commitment to growth and making a difference through technology.`,
     items: [
         {
@@ -189,6 +188,10 @@ const skills = {
             name: "CSS3"
         },
         {
+            icon: <SiTailwindcss />,
+            name: "Tailwind CSS"
+        },
+        {
             icon: <FaReact />,
             name: "React",
         },
@@ -200,22 +203,26 @@ const skills = {
             icon: <FaNode />,
             name: "Node.js"
         },
+        {
+            icon: <SiNextdotjs />,
+            name: "Next.js"
+        },
     ],
     database: [
         {
-            icon: <SiAmazondynamodb />,
-            name: "DynamoDB",
+            icon: <BiLogoPostgresql />,
+            name: "PostgreSQL",
         },
         {
             icon: <RiFirebaseLine />,
             name: "Cloud Firestore",
         },
         {
-            icon: <BiLogoPostgresql />,
-            name: "PostgreSQL",
+            icon: <SiAmazondynamodb />,
+            name: "DynamoDB",
         },
     ],
-    dev_tools: [
+    cloud_tools: [
         {
             icon: <SiDatadog />,
             name: "Datadog",
@@ -225,8 +232,30 @@ const skills = {
             name: "Docker",
         },
         {
+            icon: <SiKubernetes />,
+            name: "Kubernetes",
+        },
+        {
+            icon: <SiGooglecloud />,
+            name: "Google Cloud Platform",
+        },
+        {
+            icon: <SiCircleci />,
+            name: "CircleCI (CI/CD)",
+        },
+    ],
+    dev_tools: [
+        {
+            icon: <BiLogoVisualStudio />,
+            name: "Visual Studio Code"
+        },
+        {
             icon: <SiGoland />,
             name: "Goland"
+        },
+        {
+            icon: <FaChrome />,
+            name: "Chrome DevTools"
         },
         {
             icon: <FaGithub />,
@@ -237,20 +266,12 @@ const skills = {
             name: "Jira",
         },
         {
-            icon: <SiKubernetes />,
-            name: "Kubernetes",
+            icon: <FaConfluence />,
+            name: "Confluence",
         },
         {
-            icon: <BiLogoVisualStudio />,
-            name: "Visual Studio Code"
-        },
-        {
-            icon: <SiGooglecloud />,
-            name: "Google Cloud Platform",
-        },
-        {
-            icon: <SiCircleci />,
-            name: "CircleCI",
+            icon: <FaTrello />,
+            name: "Trello",
         },
     ],
     op_system: [
@@ -333,7 +354,7 @@ const Resume = () => {
 
                         { /* education */ }
                         <TabsContent value="Education" className="w-full">
-                        <div className="flex flex-col gap-[30px] text-center xl:text-left">
+                            <div className="flex flex-col gap-[30px] text-center xl:text-left">
                                 <h3 className="text-4xl font-bold">{education.title}</h3>
                                 <p className="max-w-[700px] text-white/70 mx-auto xl:mx-0">{education.description}</p>
                                 <ScrollArea className="h-[400px]">
@@ -372,18 +393,143 @@ const Resume = () => {
                                         })}
                                     </ul>
                                 </ScrollArea>
-                        </div>
+                            </div>
                         </TabsContent>
 
                         { /* Skills */ }
-                        <TabsContent value="Skills" className="w-full">
-                            Skills
+                        <TabsContent value="Skills" className="w-full h-full">
+                            <div className="flex flex-col gap-[30px]">
+                                <div className="flex flex-col gap-[30px] text-center xl:text-left">
+                                    <h3 className="text-4xl font-bold">{skills.title}</h3>
+                                    <p className="max-w-[700px] text-white/70 mx-auto xl:mx-0">{skills.description}</p>
+                                </div>
+                                <ScrollArea className="h-[400px]">
+                                    { /* Programming Languages */ }
+                                    <h3 className="min-h-[50px] font-bold text-2xl xl:text-left text-center">Programming Languages:</h3>
+                                    <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:gap-[30px] gap-5">
+                                        {skills.program_lang.map((lang, index) => {
+                                            return <li key={index}>
+                                                <TooltipProvider delayDuration={100}>
+                                                    <Tooltip>
+                                                        <TooltipTrigger className="w-full h-[150px] bg-[#202027] rounded-xl flex justify-center items-center group">
+                                                            <div className="text-6xl group-hover:text-accent transition-all duration-300">
+                                                                {lang.icon}
+                                                            </div>
+                                                        </TooltipTrigger>
+                                                        <TooltipContent className="bg-white text-black font-semibold">
+                                                            <p>{lang.name}</p>
+                                                        </TooltipContent>
+                                                    </Tooltip>
+                                                </TooltipProvider>
+                                            </li>
+                                        })}
+                                    </ul>
+                                    { /* Web Technologies */}
+                                    <h3 className="min-h-[50px] font-bold text-2xl xl:text-left text-center mt-10">Web Technologies:</h3>
+                                    <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:gap-[30px] gap-5">
+                                        {skills.web_tech.map((web, index) => {
+                                            return <li key={index}>
+                                                <TooltipProvider delayDuration={100}>
+                                                    <Tooltip>
+                                                        <TooltipTrigger className="w-full h-[150px] bg-[#202027] rounded-xl flex justify-center items-center group">
+                                                            <div className="text-6xl group-hover:text-accent transition-all duration-300">
+                                                                {web.icon}
+                                                            </div>
+                                                        </TooltipTrigger>
+                                                        <TooltipContent className="bg-white text-black font-semibold">
+                                                            <p>{web.name}</p>
+                                                        </TooltipContent>
+                                                    </Tooltip>
+                                                </TooltipProvider>
+                                            </li>
+                                        })}
+                                    </ul>
+                                    { /* Database Technologies */ }
+                                    <h3 className="min-h-[50px] font-bold text-2xl xl:text-left text-center mt-10">Database Technologies:</h3>
+                                    <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:gap-[30px] gap-5">
+                                        {skills.database.map((db, index) => {
+                                            return <li key={index}>
+                                                <TooltipProvider delayDuration={100}>
+                                                    <Tooltip>
+                                                        <TooltipTrigger className="w-full h-[150px] bg-[#202027] rounded-xl flex justify-center items-center group">
+                                                            <div className="text-6xl group-hover:text-accent transition-all duration-300">
+                                                                {db.icon}
+                                                            </div>
+                                                        </TooltipTrigger>
+                                                        <TooltipContent className="bg-white text-black font-semibold">
+                                                            <p>{db.name}</p>
+                                                        </TooltipContent>
+                                                    </Tooltip>
+                                                </TooltipProvider>
+                                            </li>
+                                        })}
+                                    </ul>
+                                    { /* Cloud & DevOps */ }
+                                    <h3 className="min-h-[50px] font-bold text-2xl xl:text-left text-center mt-10">Cloud and DevOps:</h3>
+                                    <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:gap-[30px] gap-5">
+                                        {skills.cloud_tools.map((cloud, index) => {
+                                            return <li key={index}>
+                                                <TooltipProvider delayDuration={100}>
+                                                    <Tooltip>
+                                                        <TooltipTrigger className="w-full h-[150px] bg-[#202027] rounded-xl flex justify-center items-center group">
+                                                            <div className="text-6xl group-hover:text-accent transition-all duration-300">
+                                                                {cloud.icon}
+                                                            </div>
+                                                        </TooltipTrigger>
+                                                        <TooltipContent className="bg-white text-black font-semibold">
+                                                            <p>{cloud.name}</p>
+                                                        </TooltipContent>
+                                                    </Tooltip>
+                                                </TooltipProvider>
+                                            </li>
+                                        })}
+                                    </ul>
+                                    { /* Software Development Tools */ }
+                                    <h3 className="min-h-[50px] font-bold text-2xl xl:text-left text-center mt-10">Software Development Tools:</h3>
+                                    <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:gap-[30px] gap-5">
+                                        {skills.dev_tools.map((dev, index) => {
+                                            return <li key={index}>
+                                                <TooltipProvider delayDuration={100}>
+                                                    <Tooltip>
+                                                        <TooltipTrigger className="w-full h-[150px] bg-[#202027] rounded-xl flex justify-center items-center group">
+                                                            <div className="text-6xl group-hover:text-accent transition-all duration-300">
+                                                                {dev.icon}
+                                                            </div>
+                                                        </TooltipTrigger>
+                                                        <TooltipContent className="bg-white text-black font-semibold">
+                                                            <p>{dev.name}</p>
+                                                        </TooltipContent>
+                                                    </Tooltip>
+                                                </TooltipProvider>
+                                            </li>
+                                        })}
+                                    </ul>
+                                    { /* Operating Systems */ }
+                                    <h3 className="min-h-[50px] font-bold text-2xl xl:text-left text-center mt-10">Operating Systems:</h3>
+                                    <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:gap-[30px] gap-5">
+                                        {skills.op_system.map((op, index) => {
+                                            return <li key={index}>
+                                                <TooltipProvider delayDuration={100}>
+                                                    <Tooltip>
+                                                        <TooltipTrigger className="w-full h-[150px] bg-[#202027] rounded-xl flex justify-center items-center group">
+                                                            <div className="text-6xl group-hover:text-accent transition-all duration-300">
+                                                                {op.icon}
+                                                            </div>
+                                                        </TooltipTrigger>
+                                                        <TooltipContent className="bg-white text-black font-semibold">
+                                                            <p>{op.name}</p>
+                                                        </TooltipContent>
+                                                    </Tooltip>
+                                                </TooltipProvider>
+                                            </li>
+                                        })}
+                                    </ul>
+                                </ScrollArea>
+                            </div>
                         </TabsContent>
-
                     </div>
                 </Tabs>
             </div>
-
         </motion.div>
     )
 }
