@@ -5,7 +5,7 @@ export async function POST(req) {
         const formspreeResponse = await fetch("https://formspree.io/f/mvgzqvvr", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ name, email, message }),
+            body: JSON.stringify({ firstname, lastname, email, phone, message }),
         });
 
         if (!formspreeResponse.ok) {
