@@ -105,4 +105,4 @@ const Capabilities = () => {
         </section>
     )
 }
-export default Capabilities
+export default Capabilities 
