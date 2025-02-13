@@ -1,6 +1,6 @@
 export async function POST(req) {
     try {
-        const { name, email, message } = await req.json();
+        const { firstname, lastname, email, phone, message } = await req.json();
 
         const formspreeResponse = await fetch("https://formspree.io/f/mvgzqvvr", {
             method: "POST",
