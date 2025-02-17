@@ -17,6 +17,7 @@ import {
 
 import Link from "next/link";
 import Image from "next/image";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 const personal_projects = [
     {
@@ -31,7 +32,7 @@ const personal_projects = [
         To address this, I developed a Restful API endpoint to deliver critical financial information dynamically. 
         I also created a Sales Overview Report leveraging the new API, which served as a blueprint for integrating additional reports through a scalable backend approach.`,
         stack: [ {name: "#React"}, {name: "#TypeScript"}, {name: "#RESTfulAPIs"}, {name: "Node.js"}, {name: "PostgreSQL"} ],
-        image: '/Portland_Playhouse.jpeg',
+        image: '/projects/Portland_Playhouse.jpeg',
         github: "https://github.com/WonderTix/WonderTix",
     },
     {
@@ -127,10 +128,58 @@ const internship_projects = [
     },
 ]
 
-const Projects = () => {
+const Projects = () => {      
+    const [activeTab, setActiveTab] = useState("personal_project");
+    const render_personal_project = (projects) => {
+        return(
+            <div>Personal Portfolio</div>
+        )
+    }
+    const render_internship_project = (projects) => {
+        return(
+            <div>Internship Portfolio</div>
+        )
+    }
     return (
-        <div>Projects Page</div>
-    )
+        <motion.section
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className="min-h-[70vh] flex flex-col justify-center py-12 xl:px-0"
+    >
+        <div className="container mx-auto flex flex-col items-start">
+            <Tabs
+                defaultValue="personal_project"
+                className="flex flex-col gap-[60px]"
+            >
+                {/* Centering the TabsList */}
+                <TabsList className="flex flex-row gap-6 justify-center mx-auto xl:mx-0 gap-6">
+                    <TabsTrigger
+                        value="personal_project"
+                        onClick={() => setActiveTab("personal_project")}
+                    >
+                        Personal Projects
+                    </TabsTrigger>
+                    <TabsTrigger
+                        value="internship_project"
+                        onClick={() => setActiveTab("internship_project")}
+                    >
+                        Internship Projects
+                    </TabsTrigger>
+                </TabsList>
+
+                {/* Tabs Content below the TabsTrigger */}
+                <div>
+                    <TabsContent value="personal_project" className="items-left">
+                        {activeTab === "personal_project" && render_personal_project(personal_projects)}
+                    </TabsContent>
+                    <TabsContent value="internship_project">
+                        {activeTab === "internship_project" && render_internship_project(internship_projects)}
+                    </TabsContent>
+                </div>
+            </Tabs>
+        </div>
+    </motion.section>
+    )   
 }
 
 export default Projects
