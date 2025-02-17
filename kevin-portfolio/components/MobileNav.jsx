@@ -23,9 +23,13 @@ const links = [
         path: "/projects",
     },
     {
-        name: "aboutme",
+        name: "about me",
         path: "/aboutme",
     },
+    {
+        name: "contact me",
+        path: "/contact"
+    }
 ]
 
 const MobileNav = () => {
@@ -40,7 +44,7 @@ const MobileNav = () => {
                     <span className="sr-only">Navigation Menu</span>
                 </SheetTitle>
                 {/* logo */ }
-                <div className='mt-32 mb-40 text-center text-2xl'>
+                <div className='mt-30 mb-40 text-center text-2xl'>
                     <Link href="/" />
                         <h1 className="text-4xl font-semibold">
                             Kevin<span className="text-accent">.</span>
