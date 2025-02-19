@@ -208,7 +208,7 @@ const Projects = () => {
                     {/* Border */}
                     <div className="border-b border-white/20"></div>
                     {/* GitHub Buttons */}
-                    <Link href={project.github}>
+                    <Link href={project.github} target="_blank">
                         <TooltipProvider delayDuration={100}>
                             <Tooltip>
                                 <TooltipTrigger className="w-[70px] h-[70px] rounded-full bg-white/5 flex justify-center items-center group">
@@ -290,7 +290,7 @@ const Projects = () => {
                     opacity: 1, 
                     transition: { delay: 2.4, duration: 0.4, ease: "easeIn"}
                 }}
-                className="min-h-[70vh] flex flex-col justify-center py-12 xl:px-0"
+                className="min-h-[80vh] flex flex-col justify-center py-12 xl:px-0"
             >
                 <div className="container mx-auto">
                     {/* Conditional Rendering of Project Content */}
