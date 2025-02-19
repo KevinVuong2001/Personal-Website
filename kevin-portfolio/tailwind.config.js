@@ -26,8 +26,8 @@ module.exports = {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
         accent: {
-          DEFAULT: "#53FFBA",
-          hover: "#3BA178",
+          DEFAULT: "#00FFFF",
+          hover: "#00FF7F",
         },
   			card: {
   				DEFAULT: 'hsl(var(--card))',
@@ -42,7 +42,7 @@ module.exports = {
   				foreground: 'hsl(var(--primary-foreground))'
   			},
   			secondary: {
-  				DEFAULT: 'hsl(var(--secondary))',
+  				DEFAULT: '#9370DB',
   				foreground: 'hsl(var(--secondary-foreground))'
   			},
   			muted: {

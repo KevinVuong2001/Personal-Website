@@ -18,6 +18,7 @@ import {
 import Link from "next/link";
 import Image from "next/image";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import WorkSliderBtn from "@/components/WorkSliderBtn";
 
 const personal_projects = [
     {
@@ -141,6 +142,7 @@ const keywords = ["open-source",
                 "React",
                 "TypeScript",
                 "dynamic",
+                "Yahoo Fantasy Sports API",
                 "OAuth 2.0",
                 "real-time access",
                 "web application",
@@ -199,7 +201,7 @@ const Projects = () => {
                     <ul className="flex flex-wrap gap-4">
                         {project.stack.map((item, index) => {
                             return (
-                                <li key={index} className="text-xl text-accent">
+                                <li key={index} className="text-xl text-[#AFCBFF] font-bold">
                                     {item.name}
                                 </li>
                             )
@@ -239,6 +241,11 @@ const Projects = () => {
                             </div>
                         </SwiperSlide>
                     })}
+                    {/* slider buttons */}
+                    <WorkSliderBtn 
+                        containerStyles="flex gap-2 absolute right-0 bottom-[calc(50%_-_25px)] xl:bottom-0 z-20 w-full justify-between xl:w-max xl:justify-none"
+                        btnStyles="bg-accent hover:bg-accent-hover text-primary text-[30px] w-[50px] flex justify-center items-center transition-all"
+                    />
                 </Swiper>
             </div>
         </div>
@@ -267,7 +274,7 @@ const Projects = () => {
             <div className="flex gap-4 mb-3">
                 <button 
                     className={`px-6 py-2 text-lg font-semibold rounded-md transition-all ${
-                        activeProjectType === "personal" ? "bg-accent text-black" : "bg-gray-700 text-white/70"
+                        activeProjectType === "personal" ? "bg-accent text-black" : "bg-secondary text-white"
                     }`}
                     onClick={() => setActiveProjectType("personal")}
                 >
@@ -275,7 +282,7 @@ const Projects = () => {
                 </button>
                 <button 
                     className={`px-6 py-2 text-lg font-semibold rounded-md transition-all ${
-                        activeProjectType === "internship" ? "bg-accent text-black" : "bg-gray-700 text-white/70"
+                        activeProjectType === "internship" ? "bg-accent text-black" : "bg-secondary text-white"
                     }`}
                     onClick={() => setActiveProjectType("internship")}
                 >
