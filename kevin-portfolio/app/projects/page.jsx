@@ -54,7 +54,8 @@ const personal_projects = [
 const internship_projects = [
     {
         num: "01",
-        category: "Apply HyDE Search Method",
+        name: "Apply HyDE Search Method",
+        category: "Information Retrieval & Search Optimization",
         company: "Oregon Health and Science University",
         problem: 
             `Although the dense retrieval method showed some promise in improving search results for qualifying candidates, it still produced a significant number of irrelevant results. 
@@ -69,7 +70,8 @@ const internship_projects = [
     },
     {
         num: "02",
-        category: "Go-Based Diagnostic Tool for Service Metrics",
+        name: "Go-Based Diagnostic Tool for Service Metrics",
+        category: "Observability & Monitoring",
         company: "Cambia Health Solutions",
         problem: 
             `Ensuring optimal application performance required better visibility into key service metrics such as latency, request volume, and error rates. 
@@ -87,7 +89,8 @@ const internship_projects = [
     },
     {
         num: "03",
-        category: "Kubernetes Service Migration",
+        name: "Kubernetes Service Migration",
+        category: "Cloud & DevOps",
         company: "Cambia Health Solutions",
         problem: "In Q2, our team's goal was to migrate Go services to Kubernetes to enhance scalability, improve deployment efficiency, and reduce infrastructure costs.",
         contribution: `Led the setup of a local Kubernetes development environment and deployed services using industry-standard tools. 
@@ -100,12 +103,13 @@ const internship_projects = [
     },
     {
         num: "04",
-        category: "Web-Based Performance Job Execution",
+        name: "Web-Based Performance Job Execution",
+        category: "Performance Engineering & Web Development",
         company: "Siemens EDA",
         problem: 
             `Running performance jobs was time-consuming, requiring users to manually check parameters and wait for results, limiting efficiency and productivity.`,
         contribution: 
-            `Developed a web application that provides an intuitive UI for users to configure and execute performance jobs with frequently used parameters.`,
+            `Built a web-based performance job execution tool using Python, CGI Programming, and Shell Scripting, enabling users to select frequently used parameters through an interactive UI.`,
         impact: 
             `Created an interactive interface that allows users to select options from a menu-like system, automatically generating and executing command-line jobs. 
             Added an email notification feature to update users on job status and results, enabling them to focus on other tasks instead of waiting for completion.`,
@@ -114,7 +118,8 @@ const internship_projects = [
     },
     {
         num: "05",
-        category: "Creating Regression Report",
+        name: "Creating Regression Report",
+        category: "Data Visualization & Reporting",
         company: "Siemens EDA",
         problem: 
             `The existing regression report was outdated and lacked key functionalities for data analysis. 
