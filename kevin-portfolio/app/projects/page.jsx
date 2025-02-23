@@ -61,12 +61,12 @@ const internship_projects = [
             `Although the dense retrieval method showed some promise in improving search results for qualifying candidates, it still produced a significant number of irrelevant results. 
             We aimed to determine if a new search method could enhance the accuracy and relevancy of the results.`,
         contribution: 
-            `Collaborated with a team to develop an innovative search algorithm using Meta’s Llama 3 large language model (LLM) to generate a typical doctor's note. 
-            This note was then used as a query for dense retrieval, aiming to improve the precision of search results.`,
+            `Collaborated on developing an advanced search algorithm leveraging Hypothetical Document Embeddings (HyDE) and Meta's Llama 3 large language model (LLM) to enhance information retrieval. 
+            The method involved generating a synthetic doctor's note as a search query for dense retrieval.`,
         impact: 
-            `Improved the accuracy of identifying potential clinical trial candidates, resulting in more relevant and precise matches across a wider range of medical topics, compared to the previous retrieval method.`,
+            `Enhanced the accuracy of identifying potential clinical trial candidates, resulting in more relevant and precise matches across a wider range of medical topics, compared to the previous retrieval method.`,
         stack: [{name: "#Python"}, {name: "#MachineLearning"}, {name: "#MATLAB"}, {name: "#LargeLanguageModel"}, {name: "InformationRetrieval"}],
-        image: "/projects/OHSU.png"
+        image: "/projects/OHSU.jpeg"
     },
     {
         num: "02",
@@ -77,13 +77,13 @@ const internship_projects = [
             `Ensuring optimal application performance required better visibility into key service metrics such as latency, request volume, and error rates. 
             The team needed a tool to analyze these metrics and recommend service level objectives (SLOs) for improved reliability.`,
         contribution: 
-            `Developed a Go-based diagnostic tool that integrated with the **Datadog API** to retrieve existing Go services and their performance metrics. 
+            `Developed a Go-based diagnostic tool that integrated with the Datadog API to retrieve existing Go services and their performance metrics. 
             Implemented a search functionality that allowed users to select specific services and view critical insights, including latency, hit counts, and error rates. 
             Designed the tool to analyze trends and generate recommended SLOs, helping engineers optimize application performance.`,
         impact: 
             `Improved service observability by providing a centralized tool for monitoring key performance metrics. 
             Enabled engineers to quickly identify bottlenecks, optimize SLOs, and enhance system reliability. 
-            Additionally, presented my work to an audience of **60+ software engineers**, demonstrating how the tool streamlined performance monitoring and proactive troubleshooting.`,
+            Additionally, presented my work to an audience of 60+ software engineers, demonstrating how the tool streamlined performance monitoring and proactive troubleshooting.`,
         stack: [{name: "#Go"}, {name: "#DatadogAPI"}, {name: "#ServiceMetrics"}, {name: "#Observability"}, {name: "#PerformanceMonitoring"}],
         image: "/projects/Datadog.png"
     },
@@ -94,12 +94,13 @@ const internship_projects = [
         company: "Cambia Health Solutions",
         problem: "In Q2, our team's goal was to migrate Go services to Kubernetes to enhance scalability, improve deployment efficiency, and reduce infrastructure costs.",
         contribution: `Led the setup of a local Kubernetes development environment and deployed services using industry-standard tools. 
-                Gained hands-on experience with Tilt (for live updates and rebuilds), Helm (for managing Kubernetes applications), and Minikube (for running Kubernetes locally). 
+                Gained hands-on experience with Tilt (for live updates and rebuilds) and Minikube (for running Kubernetes locally). 
                 Worked on containerizing services with Docker and ensuring seamless deployment using Kubernetes configurations.`,
         impact: `The migration resulted in improved deployment efficiency, reduced downtime, and optimized resource allocation, leading to better system performance and scalability. 
-                Additionally, presented my work and insights to an audience of **60+ software engineers**, demonstrating the impact of the migration and knowledge gained throughout the project.`,
-        stack: [{name: "#Docker"}, {name: "#Kubernetes"}, {name: "#Tilt"}, {name: "#Helm"}, {name: "#Minikube"}],
-        image: "/projects/Docker_Tilt.avif"
+                Additionally, presented my work and insights to an audience of 60+ software engineers, demonstrating the impact of the migration and knowledge gained throughout the project.`,
+        stack: [{name: "#Docker"}, {name: "#Kubernetes"}, {name: "#Tilt"}, {name: "#Minikube"}],
+        image: "/projects/tilt.png",
+        img_credit: "Image courtesy of Tilt (https://tilt.dev/)"
     },
     {
         num: "04",
@@ -135,38 +136,66 @@ const internship_projects = [
     },
 ]
 
-const keywords = ["open-source", 
-                "API", 
-                "Restful API", 
-                "scalable backend approach", 
-                "financial reports", "dynamically", 
-                "Sales Overview Report", 
-                "WonderTix", 
-                "blueprint", 
-                "sponsored by Portland Playhouse",
-                "React",
-                "TypeScript",
-                "dynamic",
-                "Yahoo Fantasy Sports API",
-                "OAuth 2.0",
-                "real-time access",
-                "web application",
-                "up-to-date"
-            ];
+{ /* Personal Projects Words Highlights */ }
+const personal_keywords = [
+    "open-source", 
+    "API", 
+    "Restful API", 
+    "scalable backend approach", 
+    "financial reports", "dynamically", 
+    "Sales Overview Report", 
+    "WonderTix", 
+    "blueprint", 
+    "sponsored by Portland Playhouse",
+    "React",
+    "TypeScript",
+    "dynamic",
+    "Yahoo Fantasy Sports API",
+    "OAuth 2.0",
+    "real-time access",
+    "web application",
+    "up-to-date"
+];
 
-const highlightKeywords = (text, keywords) => {
-    // Create a regex pattern dynamically from the keywords list
-    const pattern = new RegExp(`\\b(${keywords.join("|")})\\b`, "gi");
-
-    return text.split(pattern).map((part, index) => 
-        keywords.includes(part) 
-            ? <span key={index} className="font-extrabold text-accent">{part}</span> 
-            : part
-    );
+{ /* Internship Projects Words Highlights */}
+const internship_keywords = [
+    "dense retrieval",
+    "accuracy",
+    "relevancy",
+    "Hypothetical Document Embeddings (HyDE)",
+    "Meta's Llama 3",
+    "large language model",
+    "(LLM)",
+    "enhanced the accuracy",
+    "enhance",
+    "information retrieval",
+    "advanced search algorithm",
+    "search query",
+    "synthetic doctor's note",
+    "identifying",
+    "irrelevant",
+    "relevant",
+    "precise",
+    "matches",
+    "wider range"
+]
+            
+const ProjectDetails = ({ description, keywords }) => {
+    return <p className="text-white/70 text-sm md:text-base leading-relaxed">{highlightKeywords(description, keywords)}</p>;
 };
 
-const ProjectDescription = ({ description }) => {
-    return <p className="text-white/70 text-sm md:text-base leading-relaxed">{highlightKeywords(description, keywords)}</p>;
+const highlightKeywords = (text, keywords) => {
+    // Escape special regex characters, including apostrophes
+    const escapeRegex = (word) => word.replace(/[-/\\^$*+?.()|[\]{}’]/g, "\\$&"); // Includes curly apostrophe ‘
+
+    // Ensure apostrophes are treated as part of the word by keeping them in the regex
+    const pattern = new RegExp(`(${keywords.map(escapeRegex).join("|")})`, "gi");
+
+    return text.split(pattern).map((part, index) =>
+        keywords.some(keyword => part.toLowerCase() === keyword.toLowerCase())  
+            ? <span key={index} className="font-extrabold text-accent">{part}</span>
+            : part
+    );
 };
 
 const Projects = () => {      
@@ -180,6 +209,12 @@ const Projects = () => {
         //Update project state based on current index
         setPersonalProject(personal_projects[currentIndex])
     }
+    const handleInternshipSlideChange = (swiper) => {
+        // Get Current Index
+        const currentIndex = swiper.activeIndex;
+        //Update project state based on current index
+        setInternshipProject(internship_projects[currentIndex])
+    }
 
     // Function to render Personal Projects
     const renderPersonalProject = (project) => (
@@ -190,17 +225,17 @@ const Projects = () => {
                     {project.num}
                 </div>
                 {/* project name and category*/}
-                <div className="group space-y-3 md:space-y-4">
+                <div className="group space-y-4 md:space-y-5">
                     <h2 className="text-3xl md:text-[42px] font-bold leading-none group-hover:text-accent transition-all duration-500 capitalize">
                         {project.name}
                     </h2>
-                    <h2 className="text-2xl md:text-[42px] font-bold leading-none group-hover:text-accent transition-all duration-500 capitalize">
+                    <h3 className="text-2xl md:text-[32px] font-bold leading-none group-hover:text-accent transition-all duration-500 capitalize">
                         {project.category} Project
-                    </h2>
-
+                    </h3>
                     {/* Description */}
-                    <ProjectDescription 
-                            description={activeProjectType === "personal" ? personalProject.description : internshipProject.description} 
+                    <ProjectDetails 
+                            description={personalProject.description}
+                            keywords={personal_keywords}
                     />
                     {/* Stack */}
                     <ul className="flex flex-wrap gap-4">
@@ -260,15 +295,88 @@ const Projects = () => {
     const renderInternshipProject = (project) => (
         <div className="flex flex-col xl:flex-row xl:gap-[30px]">
             <div className="w-full xl:w-[70%] xl:h-[460px] flex flex-col xl:justify-between order-2 xl:order-none">
-                <h2 className="text-4xl font-bold">{project.category}</h2>
-                <div className="space-y-4">
-                    <p className="text-lg text-gray-300"><span className="font-semibold">Problem:</span> {project.problem}</p>
-                    <p className="text-lg text-gray-300"><span className="font-semibold">Contribution:</span> {project.contribution}</p>
-                    <p className="text-lg text-gray-300"><span className="font-semibold">Impact:</span> {project.impact}</p>
+                {/* outline num */}
+                <div className="text-8xl leading-none font-extrabold">
+                    {project.num}
+                </div>
+                {/* project name, category, and company */}
+                 <div className="group space-y-4 md:space-y-5">
+                    <h2 className="text-3xl md:text-[42px] font-bold leading-none group-hover:text-accent transition-all duration-500 capitalize">
+                        {project.name}
+                    </h2>
+                    <h3 className="text-2xl md:text-[32px] font-bold leading-none group-hover:text-accent transition-all duration-500 capitalize">
+                        {project.category} Project
+                    </h3>
+                    <h4 className="text-xl md:text-[24px] font-bold text-accent-hover leading-none capitalize">
+                        {project.company}
+                    </h4>
+                    {/* Problem */}
+                    <div>
+                        <h4 className="text-xl font-bold">Problem: </h4>
+                        <ProjectDetails 
+                            description={internshipProject.problem}
+                            keywords={internship_keywords}
+                        />
+                    </div>
+                    {/* Contribution */}
+                    <div>
+                        <strong className="text-xl font-extrabold">Contribution: </strong>
+                        <ProjectDetails 
+                            description={internshipProject.contribution}
+                            keywords={internship_keywords}
+                        />
+                    </div>
+                    {/* Impact */}
+                    <div>
+                        <strong className="text-xl font-extrabold">Impact: </strong>
+                        <ProjectDetails 
+                            description={internshipProject.impact}
+                            keywords={internship_keywords}
+                        />
+                    </div>
+                    {/* Stack */}
+                    <ul className="flex flex-wrap gap-4">
+                        {project.stack.map((item, index) => {
+                            return (
+                                <li key={index} className="text-xl text-[#AFCBFF] font-bold">
+                                    {item.name}
+                                </li>
+                            )
+                        })}
+                    </ul>
+                    {/* Border */}
+                    <div className="border-b border-white/20"></div>
                 </div>
             </div>
-            <div className="w-full xl:w-[50%] xl:pl-[60px]">
-                <img src={project.image} alt="Project Screenshot" className="rounded-lg shadow-lg"/>
+            <div className="w-full xl:w-[52%]">
+                <Swiper
+                    spaceBetween={30}
+                    slidesPerView={1}
+                    className="xl:h-[520px] mb-12"
+                    onSlideChange={handleInternshipSlideChange}
+                >
+                    {internship_projects.map((p, index) => {
+                        return <SwiperSlide key={index} className="w-full">
+                            <div className="h-[460px] w-full relative group flex justify-center items-center bg-pink-50/60">
+                                {/* Overlay */}
+                                <div className="absolute top-0 left-0 w-full h-full">
+                                    <img src={project.image} alt="Project Screenshot" className="w-full h-full object-cover"/>
+                                </div>
+                                {/* Check for img_credit and display if available */}
+                                {p.img_credit && (
+                                <div className="absolute bottom-0 left-0 p-2 text-xs text-white bg-black/50">
+                                    <span>Image Credit: {p.img_credit}</span>
+                                </div>
+                                )}
+                            </div>
+                        </SwiperSlide>
+                    })}
+                    {/* slider buttons */}
+                    <WorkSliderBtn 
+                        containerStyles="flex gap-2 absolute right-0 bottom-[calc(50%_-_25px)] xl:bottom-0 z-20 w-full justify-between xl:w-max xl:justify-none"
+                        btnStyles="bg-accent hover:bg-accent-hover text-primary text-[30px] w-[50px] flex justify-center items-center transition-all"
+                    />
+                </Swiper>
             </div>
         </div>
     );
