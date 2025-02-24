@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion";
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -20,171 +20,19 @@ import Image from "next/image";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import WorkSliderBtn from "@/components/WorkSliderBtn";
 
-const personal_projects = [
-    {
-        num: "01",
-        category: "Full-Stack",
-        name: "WonderTix",
-        title: "project 1",
-        description:
-        `For my senior capstone, I collaborated with eight colleagues to develop WonderTix, an open-source software project sponsored by Portland Playhouse and initiated at Portland State University in 2021. 
-        WonderTix is a comprehensive sales platform designed to manage task assignments, generate financial reports, and handle ticket sales. 
-        At the start of the project, the financial reports relied on hardcoded data, which limited flexibility for future updates. 
-        To address this, I developed a Restful API endpoint to deliver critical financial information dynamically. 
-        I also created a Sales Overview Report leveraging the new API, implemented in React and TypeScript which served as a blueprint for integrating additional reports through a scalable backend approach.`,
-        stack: [ {name: "#React"}, {name: "#TypeScript"}, {name: "#RESTfulAPIs"}, {name: "#Node.js"}, {name: "#PostgreSQL"} ],
-        image: '/projects/Portland_Playhouse.jpeg',
-        github: "https://github.com/WonderTix/WonderTix",
-    },
-    {
-        num: "02",
-        category: "Full-Stack/Cloud",
-        name: "NBA Fantasy League",
-        title: "project 2",
-        description:
-        `Developed a dynamic NBA Fantasy League web application utilizing the Yahoo Fantasy Sports API and OAuth 2.0 authentication to provide users with real-time access to their fantasy league data. 
-        The application enables users to track player stats, view standings, search for free agents, and manage their rosters seamlessly. 
-        By integrating Yahoo's API, the platform retrieves up-to-date fantasy data, allowing users to make informed decisions for their teams.`,
-        stack: [ {name: "#Python"}, {name: "#Flask"}, {name: "#OAuth2"}, {name: "#GoogleCloud"}, {name: "#Firestore"}, {name: "#RESTfulAPIs"}, {name: "#HTML"}, {name: "#Bootstrap"}, {name: "#JavaScript"}],
-        image: '/projects/NBA_Fantasy_Home.png',
-        github: "https://github.com/KevinVuong2001/Yahoo-NBA-Fantasy-League-Project",
-    },
-]
+// Personal Project Data
+import personal_keywords from "./personal_project_data/personal_keywords";
+import personal_projects from "./personal_project_data/personal_projects";
 
-const internship_projects = [
-    {
-        num: "01",
-        name: "Apply HyDE Search Method",
-        category: "Information Retrieval & Search Optimization",
-        company: "Oregon Health and Science University",
-        problem: 
-            `Although the dense retrieval method showed some promise in improving search results for qualifying candidates, it still produced a significant number of irrelevant results. 
-            We aimed to determine if a new search method could enhance the accuracy and relevancy of the results.`,
-        contribution: 
-            `Collaborated on developing an advanced search algorithm leveraging Hypothetical Document Embeddings (HyDE) and Meta's Llama 3 large language model (LLM) to enhance information retrieval. 
-            The method involved generating a synthetic doctor's note as a search query for dense retrieval.`,
-        impact: 
-            `Enhanced the accuracy of identifying potential clinical trial candidates, resulting in more relevant and precise matches across a wider range of medical topics, compared to the previous retrieval method.`,
-        stack: [{name: "#Python"}, {name: "#MachineLearning"}, {name: "#MATLAB"}, {name: "#LargeLanguageModel"}, {name: "InformationRetrieval"}],
-        image: "/projects/OHSU.jpeg"
-    },
-    {
-        num: "02",
-        name: "Go-Based Diagnostic Tool for Service Metrics",
-        category: "Observability & Monitoring",
-        company: "Cambia Health Solutions",
-        problem: 
-            `Ensuring optimal application performance required better visibility into key service metrics such as latency, request volume, and error rates. 
-            The team needed a tool to analyze these metrics and recommend service level objectives (SLOs) for improved reliability.`,
-        contribution: 
-            `Developed a Go-based diagnostic tool that integrated with the Datadog API to retrieve existing Go services and their performance metrics. 
-            Implemented a search functionality that allowed users to select specific services and view critical insights, including latency, hit counts, and error rates. 
-            Designed the tool to analyze trends and generate recommended SLOs, helping engineers optimize application performance.`,
-        impact: 
-            `Improved service observability by providing a centralized tool for monitoring key performance metrics. 
-            Enabled engineers to quickly identify bottlenecks, optimize SLOs, and enhance system reliability. 
-            Additionally, presented my work to an audience of 60+ software engineers, demonstrating how the tool streamlined performance monitoring and proactive troubleshooting.`,
-        stack: [{name: "#Go"}, {name: "#DatadogAPI"}, {name: "#ServiceMetrics"}, {name: "#Observability"}, {name: "#PerformanceMonitoring"}],
-        image: "/projects/Datadog.png"
-    },
-    {
-        num: "03",
-        name: "Kubernetes Service Migration",
-        category: "Cloud & DevOps",
-        company: "Cambia Health Solutions",
-        problem: "In Q2, our team's goal was to migrate Go services to Kubernetes to enhance scalability, improve deployment efficiency, and reduce infrastructure costs.",
-        contribution: `Led the setup of a local Kubernetes development environment and deployed services using industry-standard tools. 
-                Gained hands-on experience with Tilt (for live updates and rebuilds) and Minikube (for running Kubernetes locally). 
-                Worked on containerizing services with Docker and ensuring seamless deployment using Kubernetes configurations.`,
-        impact: `The migration resulted in improved deployment efficiency, reduced downtime, and optimized resource allocation, leading to better system performance and scalability. 
-                Additionally, presented my work and insights to an audience of 60+ software engineers, demonstrating the impact of the migration and knowledge gained throughout the project.`,
-        stack: [{name: "#Docker"}, {name: "#Kubernetes"}, {name: "#Tilt"}, {name: "#Minikube"}],
-        image: "/projects/tilt.png",
-        img_credit: "Image courtesy of Tilt (https://tilt.dev/)"
-    },
-    {
-        num: "04",
-        name: "Web-Based Performance Job Execution",
-        category: "Performance Engineering & Web Development",
-        company: "Siemens EDA",
-        problem: 
-            `Running performance jobs was time-consuming, requiring users to manually check parameters and wait for results, limiting efficiency and productivity.`,
-        contribution: 
-            `Built a web-based performance job execution tool using Python, CGI Programming, and Shell Scripting, enabling users to select frequently used parameters through an interactive UI.`,
-        impact: 
-            `Created an interactive interface that allows users to select options from a menu-like system, automatically generating and executing command-line jobs. 
-            Added an email notification feature to update users on job status and results, enabling them to focus on other tasks instead of waiting for completion.`,
-        stack: [{name: "#Python"}, {name: "#JavaScript"}, {name: "#HTML"}, {name: "#CSS"}, {name: "#CGIProgramming"}, {name: "#ShellScripting"}],
-        image: "/projects/CGI_logo.png"
-    },
-    {
-        num: "05",
-        name: "Creating Regression Report",
-        category: "Data Visualization & Reporting",
-        company: "Siemens EDA",
-        problem: 
-            `The existing regression report was outdated and lacked key functionalities for data analysis. 
-            The goal was to develop a more interactive and user-friendly report by efficiently processing summary files and enhancing data visualization.`,
-        contribution: 
-            `Developed a new report generation system using Python, JavaScript, HTML, and CSS. 
-            Implemented interactive features such as sorting (by date, numbers, and alphabetical order), tooltips for better data insights, and customizable reports based on user-defined parameters.`,
-        impact: 
-            `Improved report usability and efficiency by enabling users to quickly analyze regression results. 
-            Added functionality to generate reports for first N rows, past N days, and branch-specific runs, streamlining decision-making and debugging.`,
-        stack: [{name: "#Python"}, {name: "#JavaScript"}, {name: "#HTML"}, {name: "#CSS"}, {name: "#BrowserDebuggersChrome"}],
-        image: "/projects/Siemens.jpeg"
-    },
-]
-
-{ /* Personal Projects Words Highlights */ }
-const personal_keywords = [
-    "open-source", 
-    "API", 
-    "Restful API", 
-    "scalable backend approach", 
-    "financial reports", "dynamically", 
-    "Sales Overview Report", 
-    "WonderTix", 
-    "blueprint", 
-    "sponsored by Portland Playhouse",
-    "React",
-    "TypeScript",
-    "dynamic",
-    "Yahoo Fantasy Sports API",
-    "OAuth 2.0",
-    "real-time access",
-    "web application",
-    "up-to-date"
-];
-
-{ /* Internship Projects Words Highlights */}
-const internship_keywords = [
-    "dense retrieval",
-    "accuracy",
-    "relevancy",
-    "Hypothetical Document Embeddings (HyDE)",
-    "Meta's Llama 3",
-    "large language model",
-    "(LLM)",
-    "enhanced the accuracy",
-    "enhance",
-    "information retrieval",
-    "advanced search algorithm",
-    "search query",
-    "synthetic doctor's note",
-    "identifying",
-    "irrelevant",
-    "relevant",
-    "precise",
-    "matches",
-    "wider range"
-]
+// Internship Project Data
+import internship_keywords from "./internship_project_data/internship_keywords";
+import internship_projects from "./internship_project_data/internship_projects";
             
 const ProjectDetails = ({ description, keywords }) => {
     return <p className="text-white/70 text-sm md:text-base leading-relaxed">{highlightKeywords(description, keywords)}</p>;
 };
 
-const highlightKeywords = (text, keywords) => {
+const highlightKeywords = (text, keywords, excludeKeywords = []) => {
     // Escape special regex characters, including apostrophes
     const escapeRegex = (word) => word.replace(/[-/\\^$*+?.()|[\]{}’]/g, "\\$&"); // Includes curly apostrophe ‘
 
@@ -192,16 +40,23 @@ const highlightKeywords = (text, keywords) => {
     const pattern = new RegExp(`(${keywords.map(escapeRegex).join("|")})`, "gi");
 
     return text.split(pattern).map((part, index) =>
-        keywords.some(keyword => part.toLowerCase() === keyword.toLowerCase())  
+        // Only highlight if part is a keyword and not in the exclude list
+        keywords.some(keyword => part.toLowerCase() === keyword.toLowerCase()) && 
+        !excludeKeywords.some(exclude => part.toLowerCase() === exclude.toLowerCase())
             ? <span key={index} className="font-extrabold text-accent">{part}</span>
             : part
     );
 };
 
+
 const Projects = () => {      
     const [activeProjectType, setActiveProjectType] = useState("personal");
     const [personalProject, setPersonalProject] = useState(personal_projects[0]);
     const [internshipProject, setInternshipProject] = useState(internship_projects[0]);
+
+    // Create refs to store the swiper instances
+    const personalSwiperRef = useRef(null);
+    const internshipSwiperRef = useRef(null);
     
     const handlePersonalSlideChange = (swiper) => {
         // Get Current Index
@@ -215,6 +70,23 @@ const Projects = () => {
         //Update project state based on current index
         setInternshipProject(internship_projects[currentIndex])
     }
+
+    // Effect to reset Swiper slide when project type changes
+    useEffect(() => {
+        if (activeProjectType === "personal") {
+            personalSwiperRef.current?.swiper.slideTo(0); // Reset to slide 0
+            personalSwiperRef.current?.swiper.update(); // Force update of swiper
+            setPersonalProject(personal_projects[0])
+        } else if (activeProjectType === "internship") {
+            internshipSwiperRef.current?.swiper.slideTo(0); // Reset to slide 0
+            internshipSwiperRef.current?.swiper.update(); // Force update of swiper
+            setInternshipProject(internship_projects[0])
+        }
+    }, [activeProjectType]); // This will run when `activeProjectType` changes
+
+    const handleProjectTypeChange = (type) => {
+        setActiveProjectType(type);
+    };
 
     // Function to render Personal Projects
     const renderPersonalProject = (project) => (
@@ -270,6 +142,7 @@ const Projects = () => {
                     slidesPerView={1}
                     className="xl:h-[520px] mb-12"
                     onSlideChange={handlePersonalSlideChange}
+                    ref={personalSwiperRef}
                 >
                     {personal_projects.map((p, index) => {
                         return <SwiperSlide key={index} className="w-full">
@@ -354,6 +227,7 @@ const Projects = () => {
                     slidesPerView={1}
                     className="xl:h-[520px] mb-12"
                     onSlideChange={handleInternshipSlideChange}
+                    ref={internshipSwiperRef}
                 >
                     {internship_projects.map((p, index) => {
                         return <SwiperSlide key={index} className="w-full">
@@ -367,7 +241,7 @@ const Projects = () => {
                                 <div className="absolute bottom-0 left-0 p-2 text-xs text-white bg-black/50">
                                     <span>Image Credit: {p.img_credit}</span>
                                 </div>
-                                )}
+                            )}
                             </div>
                         </SwiperSlide>
                     })}
@@ -389,7 +263,7 @@ const Projects = () => {
                     className={`px-6 py-2 text-lg font-semibold rounded-md transition-all ${
                         activeProjectType === "personal" ? "bg-accent text-black" : "bg-secondary text-white"
                     }`}
-                    onClick={() => setActiveProjectType("personal")}
+                    onClick={() => handleProjectTypeChange("personal")}
                 >
                     Personal Projects
                 </button>
@@ -397,7 +271,7 @@ const Projects = () => {
                     className={`px-6 py-2 text-lg font-semibold rounded-md transition-all ${
                         activeProjectType === "internship" ? "bg-accent text-black" : "bg-secondary text-white"
                     }`}
-                    onClick={() => setActiveProjectType("internship")}
+                    onClick={() => handleProjectTypeChange("internship")}
                 >
                     Internship Projects
                 </button>
