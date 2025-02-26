@@ -55,14 +55,15 @@ const internship_projects = [
         category: "Performance Engineering & Web Development",
         company: "Siemens EDA",
         problem: 
-            `Running performance jobs was time-consuming, requiring users to manually check parameters and wait for results, limiting efficiency and productivity.`,
+            `Running performance jobs was time-consuming, requiring users to manually check parameters and wait for results, limiting efficiency and productivity.
+            The goal is to developed an interactive web-based tool that runs or generates the command-line jobs.`,
         contribution: 
             `Built a web-based performance job execution tool using Python, CGI Programming, and Shell Scripting, enabling users to select frequently used parameters through an interactive UI.`,
         impact: 
             `Created an interactive interface that allows users to select options from a menu-like system, automatically generating and executing command-line jobs. 
             Added an email notification feature to update users on job status and results, enabling them to focus on other tasks instead of waiting for completion.`,
         stack: [{name: "#Python"}, {name: "#JavaScript"}, {name: "#HTML"}, {name: "#CSS"}, {name: "#CGIProgramming"}, {name: "#ShellScripting"}],
-        image: "/projects/CGI_logo.png"
+        image: "/projects/Siemens.jpeg"
     },
     {
         num: "05",
@@ -77,9 +78,9 @@ const internship_projects = [
             Implemented interactive features such as sorting (by date, numbers, and alphabetical order), tooltips for better data insights, and customizable reports based on user-defined parameters.`,
         impact: 
             `Improved report usability and efficiency by enabling users to quickly analyze regression results. 
-            Added functionality to generate reports for first N rows, past N days, and branch-specific runs, streamlining decision-making and debugging.`,
+            Added functionality to generate reports for first N rows, past N days (ex. weeks, months), and branch-specific runs, streamlining decision-making and debugging.`,
         stack: [{name: "#Python"}, {name: "#JavaScript"}, {name: "#HTML"}, {name: "#CSS"}, {name: "#BrowserDebuggersChrome"}],
-        image: "/projects/Siemens.jpeg"
+        image: "/projects/Siemens.png"
     },
 ]
 

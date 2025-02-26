@@ -21,31 +21,51 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import WorkSliderBtn from "@/components/WorkSliderBtn";
 
 // Personal Project Data
-import personal_keywords from "./personal_project_data/personal_keywords";
+import { personal_project_issue, personal_keywords, personal_tech_keywords } from "./personal_project_data/personal_keywords";
 import personal_projects from "./personal_project_data/personal_projects";
 
 // Internship Project Data
-import internship_keywords from "./internship_project_data/internship_keywords";
+import { internship_issues, internship_keywords, internship_tech_keywords } from "./internship_project_data/internship_keywords";
 import internship_projects from "./internship_project_data/internship_projects";
             
-const ProjectDetails = ({ description, keywords }) => {
-    return <p className="text-white/70 text-sm md:text-base leading-relaxed">{highlightKeywords(description, keywords)}</p>;
+const ProjectDetails = ({ description, keywords, tech_keywords, issues }) => {
+    console.log(issues)
+    return <p className="text-white/70 text-sm md:text-base leading-relaxed">{highlightKeywords(description, keywords, tech_keywords, issues)}</p>;
 };
 
-const highlightKeywords = (text, keywords, excludeKeywords = []) => {
+const highlightKeywords = (text, keywords, tech_keywords, issues, excludeKeywords = []) => {
     // Escape special regex characters, including apostrophes
-    const escapeRegex = (word) => word.replace(/[-/\\^$*+?.()|[\]{}’]/g, "\\$&"); // Includes curly apostrophe ‘
+    const escapeRegex = (word) => word.replace(/[-/\\^$*+?.()|[\]{}’]/g, "\\$&");
 
-    // Ensure apostrophes are treated as part of the word by keeping them in the regex
-    const pattern = new RegExp(`(${keywords.map(escapeRegex).join("|")})`, "gi");
+    // Combine both general and technical keywords into one regex pattern
+    const pattern = new RegExp(`(${[...keywords, ...tech_keywords, ...issues].map(escapeRegex).join("|")})`, "gi");
 
-    return text.split(pattern).map((part, index) =>
-        // Only highlight if part is a keyword and not in the exclude list
-        keywords.some(keyword => part.toLowerCase() === keyword.toLowerCase()) && 
-        !excludeKeywords.some(exclude => part.toLowerCase() === exclude.toLowerCase())
-            ? <span key={index} className="font-extrabold text-accent">{part}</span>
-            : part
-    );
+    return text.split(pattern).map((part, index) => {
+        const lowerPart = part.toLowerCase();
+
+        // Exclude certain words from highlighting
+        if (excludeKeywords.some(exclude => lowerPart === exclude.toLowerCase())) {
+            return part;
+        }
+
+        // Highlight technical keywords in blue
+        if (issues.some(issue=> lowerPart === issue.toLowerCase())) {
+            console.log("Spotted")
+            return <span key={index} className="font-extrabold text-problem">{part}</span>;
+        }
+
+        // Highlight technical keywords in blue
+        if (tech_keywords.some(tech => lowerPart === tech.toLowerCase())) {
+            return <span key={index} className="font-extrabold text-secondary">{part}</span>;
+        }
+
+        // Highlight general keywords in accent color
+        if (keywords.some(keyword => lowerPart === keyword.toLowerCase())) {
+            return <span key={index} className="font-extrabold text-accent">{part}</span>;
+        }
+
+        return part;
+    });
 };
 
 
@@ -98,16 +118,18 @@ const Projects = () => {
                 </div>
                 {/* project name and category*/}
                 <div className="group space-y-4 md:space-y-5">
-                    <h2 className="text-3xl md:text-[42px] font-bold leading-none group-hover:text-accent transition-all duration-500 capitalize">
+                    <h2 className="text-3xl md:text-[42px] font-bold leading-none group-hover:text-accent-hover transition-all duration-500 capitalize">
                         {project.name}
                     </h2>
-                    <h3 className="text-2xl md:text-[32px] font-bold leading-none group-hover:text-accent transition-all duration-500 capitalize">
+                    <h3 className="text-2xl md:text-[32px] font-bold leading-none group-hover:text-accent-hover transition-all duration-500 capitalize">
                         {project.category} Project
                     </h3>
                     {/* Description */}
                     <ProjectDetails 
                             description={personalProject.description}
                             keywords={personal_keywords}
+                            tech_keywords={personal_tech_keywords}
+                            issues={personal_project_issue}
                     />
                     {/* Stack */}
                     <ul className="flex flex-wrap gap-4">
@@ -174,21 +196,23 @@ const Projects = () => {
                 </div>
                 {/* project name, category, and company */}
                  <div className="group space-y-4 md:space-y-5">
-                    <h2 className="text-3xl md:text-[42px] font-bold leading-none group-hover:text-accent transition-all duration-500 capitalize">
+                    <h2 className="text-3xl md:text-[42px] font-bold leading-none group-hover:text-accent-hover transition-all duration-500 capitalize">
                         {project.name}
                     </h2>
-                    <h3 className="text-2xl md:text-[32px] font-bold leading-none group-hover:text-accent transition-all duration-500 capitalize">
+                    <h3 className="text-2xl md:text-[32px] font-bold leading-none group-hover:text-accent-hover transition-all duration-500 capitalize">
                         {project.category} Project
                     </h3>
-                    <h4 className="text-xl md:text-[24px] font-bold text-accent-hover leading-none capitalize">
+                    <h4 className="text-xl md:text-[24px] font-bold text-secondary leading-none capitalize">
                         {project.company}
                     </h4>
                     {/* Problem */}
                     <div>
-                        <h4 className="text-xl font-bold">Problem: </h4>
+                        <h4 className="text-xl font-bold">Goal: </h4>
                         <ProjectDetails 
                             description={internshipProject.problem}
                             keywords={internship_keywords}
+                            tech_keywords={internship_tech_keywords}
+                            issues={internship_issues}
                         />
                     </div>
                     {/* Contribution */}
@@ -197,6 +221,8 @@ const Projects = () => {
                         <ProjectDetails 
                             description={internshipProject.contribution}
                             keywords={internship_keywords}
+                            tech_keywords={internship_tech_keywords}
+                            issues={internship_issues}
                         />
                     </div>
                     {/* Impact */}
@@ -205,6 +231,8 @@ const Projects = () => {
                         <ProjectDetails 
                             description={internshipProject.impact}
                             keywords={internship_keywords}
+                            tech_keywords={internship_tech_keywords}
+                            issues={internship_issues}
                         />
                     </div>
                     {/* Stack */}

@@ -336,7 +336,7 @@ const Resume = () => {
                                                     <h3 className="text-accent">{item.duration}</h3>
                                                     <h3 className="text-accent min-h-[40px]">{item.location}</h3>
                                                     <div className="text-left">
-                                                        <ul className='list-disc pl-5 marker:text-[#303F9F]'>
+                                                        <ul className='list-disc pl-5 marker:text-secondary'>
                                                             { /* list of responsibilities */ }
                                                             {item.responsibilities.map((responsibility, i) => (
                                                                 <li key={i}>{responsibility}</li>
@@ -372,7 +372,7 @@ const Resume = () => {
                                                     <h3 className="text-accent min-h-[40px]">GPA: {item.GPA}</h3>
                                                     <div className="text-left">
                                                         <h3 className="min-h-[40px] font-bold">Coursework:</h3>
-                                                        <ul className='grid grid-cols-2 list-disc pl-6 gap-x-6 marker:text-[#303F9F] '>
+                                                        <ul className='grid grid-cols-2 list-disc pl-6 gap-x-6 marker:text-secondary'>
                                                             { /* list of coursework */ }
                                                             {item.coursework.map((coursework, i) => (
                                                                 <li key={i}>{coursework}</li>

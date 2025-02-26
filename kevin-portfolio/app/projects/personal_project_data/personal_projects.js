@@ -20,7 +20,8 @@ const personal_projects = [
         name: "NBA Fantasy League",
         title: "project 2",
         description:
-        `Developed a dynamic NBA Fantasy League web application utilizing the Yahoo Fantasy Sports API and OAuth 2.0 authentication to provide users with real-time access to their fantasy league data. 
+        `Developed a dynamic NBA Fantasy League web application using Python and Flask, integrating the Yahoo Fantasy Sports API, OAuth 2.0 authentication, and Google Cloud Firestore to provide users with real-time access to their fantasy league data.
+        Leveraged Flask to build the backend, handling user authentication, API requests, and data processing.
         The application enables users to track player stats, view standings, search for free agents, and manage their rosters seamlessly. 
         By integrating Yahoo's API, the platform retrieves up-to-date fantasy data, allowing users to make informed decisions for their teams.`,
         stack: [ {name: "#Python"}, {name: "#Flask"}, {name: "#OAuth2"}, {name: "#GoogleCloud"}, {name: "#Firestore"}, {name: "#RESTfulAPIs"}, {name: "#HTML"}, {name: "#Bootstrap"}, {name: "#JavaScript"}],
