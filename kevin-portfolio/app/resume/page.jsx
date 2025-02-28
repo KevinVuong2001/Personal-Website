@@ -381,7 +381,7 @@ const Resume = () => {
                                                     </div>
                                                     <div className="text-left">
                                                         <h3 className="min-h-[20px] font-bold">Achievements:</h3>
-                                                        <ul className='list-disc pl-5 marker:text-[#303F9F]'>
+                                                        <ul className='list-disc pl-5 marker:text-secondary'>
                                                             { /* list of achievements */ }
                                                             {item.achievements.map((achievement, i) => (
                                                                 <li key={i}>{achievement}</li>

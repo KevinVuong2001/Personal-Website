@@ -23,16 +23,15 @@ module.exports = {
 	},
   	extend: {
   		colors: {
-  			background: 'hsl(var(--background))',
+  			background: 'hsl(var(--primary))',
   			foreground: 'hsl(var(--foreground))',
         accent: {
           DEFAULT: "#4A90E2",
-          hover: "#00FF7F",
+          hover: "#4ae29c",
         },
-  			
   		primary: {
-  			DEFAULT: 'hsl(var(--primary))',
-  			foreground: 'hsl(var(--primary-foreground))'
+  			DEFAULT: 'hsl(210, 50%, 15%)',
+  			foreground: '#4a90e2'
   		},
   		secondary: {
   			DEFAULT: '#e29c4a',

@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import React, { useState, useRef, useEffect } from "react";
+import { Button } from "@/components/ui/button";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -171,7 +172,7 @@ const Projects = () => {
                             <div className="h-[460px] w-full relative group flex justify-center items-center bg-pink-50/60">
                                 {/* Overlay */}
                                 <div className="absolute top-0 left-0 w-full h-full">
-                                    <img src={project.image} alt="Project Screenshot" className="w-full h-full object-cover"/>
+                                    <img src={project.image} alt="Project Screenshot" className="w-full h-full sm:object-fill md:object-cover"/>
                                 </div>
                             </div>
                         </SwiperSlide>
@@ -262,7 +263,7 @@ const Projects = () => {
                             <div className="h-[460px] w-full relative group flex justify-center items-center bg-pink-50/60">
                                 {/* Overlay */}
                                 <div className="absolute top-0 left-0 w-full h-full">
-                                    <img src={project.image} alt="Project Screenshot" className="w-full h-full object-cover"/>
+                                    <img src={project.image} alt="Project Screenshot" className="w-full h-full sm:object-fill md:object-cover"/>
                                 </div>
                                 {/* Check for img_credit and display if available */}
                                 {p.img_credit && (
@@ -286,23 +287,25 @@ const Projects = () => {
     return(
         <div className="container mx-auto flex flex-col items-start py-6">
             {/* Buttons to Toggle Project Type */}
-            <div className="flex gap-4 mb-3">
-                <button 
-                    className={`px-6 py-2 text-lg font-semibold rounded-md transition-all ${
+            <div className="flex flex-wrap sm:flex-nowrap gap-4 mb-3">
+                <Button
+                    size="lg" 
+                    className={`px-6 py-2 md:text-lg xs:text-sm font-semibold rounded-md transition-all ${
                         activeProjectType === "personal" ? "bg-accent text-black" : "bg-secondary text-white"
                     }`}
                     onClick={() => handleProjectTypeChange("personal")}
                 >
                     Personal Projects
-                </button>
-                <button 
-                    className={`px-6 py-2 text-lg font-semibold rounded-md transition-all ${
+                </Button>
+                <Button
+                    size="lg" 
+                    className={`px-6 py-2 md:text-lg sm:text-sm font-semibold rounded-md transition-all ${
                         activeProjectType === "internship" ? "bg-accent text-black" : "bg-secondary text-white"
                     }`}
                     onClick={() => handleProjectTypeChange("internship")}
                 >
                     Internship Projects
-                </button>
+                </Button>
             </div>
 
             {/* Motion Section for Animation */}
