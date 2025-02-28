@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 
-const Photo = () => {
+const Photo = (image) => {
   return (
     <div className="w-full h-full relative">
       <motion.div
@@ -22,6 +22,31 @@ const Photo = () => {
           }}
           className="w-[500px] h-[500px] relative"
         >
+          {/* Pulsing Glow Effect */}
+          <motion.div
+            className="absolute inset-0 w-full h-full rounded-full border-4 border-secondary"
+            animate={{
+              scale: [1, 1.1, 1],  // Makes it pulse
+              boxShadow: [
+                "0 0 15px rgba(74, 144, 226, 0.8)",  // Blue
+                "0 0 15px rgba(74, 226, 156, 0.8)",  // Green
+                "0 0 15px rgba(226, 156, 74, 0.8)",  // Orange
+                "0 0 15px rgba(74, 144, 226, 0.8)",  // Blue (reset)
+              ],
+              borderColor: [
+                "#4A90E2",  // Blue
+                "#4ae29c",   // Green
+                "#e29c4a",   // Orange
+                "#4A90E2",   // Blue (reset)
+              ],
+            }}
+            transition={{
+              repeat: Infinity,
+              repeatType: "loop",
+              duration: 3,
+              ease: "easeInOut",
+            }}
+          />
           <Image
             src="/Profile_Pic.jpg"
             priority
@@ -31,34 +56,6 @@ const Photo = () => {
             className="object-cover rounded-full"
           />
         </motion.div>
-
-        {/* circle animation */}
-        <motion.svg
-          fill="transparent"
-          viewBox="0 0 490 490"  // Ensures it fits the size of the image
-          xmlns="http://www.w3.org/2000/svg"
-          className="absolute inset-0"
-        >
-          <motion.circle
-            cx="250" 
-            cy="250" 
-            r="260" 
-            stroke="#4A90E2"
-            strokeWidth="6"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            initial={{ strokeDasharray: "24 10 0 0" }}
-            animate={{
-              strokeDasharray: ["40 120 25 25", "16 25 92 72", "35 250 22 22"],
-              rotate: 360,  
-            }}
-            transition={{
-              duration: 10,
-              repeat: Infinity,
-              repeatType: "reverse",
-            }}
-          />
-        </motion.svg>
       </motion.div>
     </div>
   );
