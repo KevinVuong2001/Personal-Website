@@ -5,6 +5,12 @@ import Image from "next/image";
 import { TypeAnimation } from 'react-type-animation';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
+import Timeline from '@/components/Timeline';
+
+// Sections
+import Autobiography from './autobiography/page';
+import Professional from './professional/page';
+import Hobbies from './hobbies/page';
 
 const bio = 
     `Technology has been a major part of my life from a young age—whether it was playing games on my Nintendo DS or watching videos on YouTube, 
@@ -49,7 +55,6 @@ const AboutMe = () => {
                             }`}
                             onClick={() => {
                                 handleAboutMeType("bio")
-                                document.getElementById("bio")?.scrollIntoView({ behavior: "smooth" })
                             }}
                         >
                             Autobiography
@@ -62,7 +67,6 @@ const AboutMe = () => {
                             }`}
                             onClick={() => {
                                 handleAboutMeType("professional")
-                                document.getElementById("professional")?.scrollIntoView({ behavior: "smooth" })
                             }}
                         >
                             Professional Experience
@@ -74,121 +78,45 @@ const AboutMe = () => {
                             }`}
                             onClick={() => {
                                 handleAboutMeType("hobbies")
-                                document.getElementById("hobbies")?.scrollIntoView({ behavior: "smooth" })
                             }}
                         >
                             Hobbies & Interests
                         </Button>
-                    </div>
-                
+                    </div>  
             </motion.div>
 
             {/* Content Sections (Outside the Container, Full Width) */}
             <div className="w-full text-center">
-
                 {/* Biography Section */}
-                <div id="bio" className="w-full flex flex-col items-center py-12">
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{
-                            opacity: 1,
-                            y: 0,
-                            transition: { duration: 2.5, ease: "easeOut" },
-                        }}
-                        className="flex flex-col xl:flex-row items-center xl:items-start xl:px-6 gap-12 w-full"
-                    >
-                        <div className="w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] lg:w-[500px] lg:h-[500px] relative xl:mr-8">
-                            {/* Pulsing Glow Effect */}
-                            <motion.div
-                                className="absolute inset-0 w-full h-full rounded-full border-4 border-secondary"
-                                animate={{
-                                    scale: [1, 1.05, 1],  // Makes it pulse
-                                    boxShadow: [
-                                        "0 0 15px rgba(74, 144, 226, 0.8)",  // Blue
-                                        "0 0 15px rgba(74, 226, 156, 0.8)",  // Green
-                                        "0 0 15px rgba(226, 156, 74, 0.8)",  // Orange
-                                        "0 0 15px rgba(74, 144, 226, 0.8)",  // Blue (reset)
-                                    ],
-                                    borderColor: [
-                                        "#4A90E2",  // Blue
-                                        "#4ae29c",   // Green
-                                        "#e29c4a",   // Orange
-                                        "#4A90E2",   // Blue (reset)
-                                    ],
-                                }}
-                                transition={{
-                                    repeat: Infinity,
-                                    repeatType: "loop",
-                                    duration: 4,
-                                    ease: "easeInOut",
-                                }}
-                            />
-                            <Image
-                                src="/Kevin.jpeg"
-                                priority
-                                quality={100}
-                                fill
-                                alt="Kevin in suit"
-                                className="object-cover rounded-full"
-                            />
-                        </div>
-                        <motion.div 
-                            initial="hidden"
-                            animate="visible"
-                            variants={{
-                                hidden: {},
-                                visible: { transition: { staggerChildren: 0.3 } }
-                            }}
-                            className="text-center xl:text-left max-w-[800px] space-y-4"
-                        >
-                            <motion.h2 
-                                variants={{ hidden: { opacity: 0, x: -30 }, visible: { opacity: 1, x: 0 } }} 
-                                transition={{ duration: 0.7 }} 
-                                className="text-2xl md:text-4xl font-bold text-secondary text-center xl:text-left"
-                            >
-                                <span>Hello, I'm Kevin Vuong, an aspiring </span>
-                                <TypeAnimation
-                                    sequence={[
-                                        "software", 1000, 
-                                        "web", 1000,
-                                        "front-end", 1000,
-                                        "back-end", 1000,
-                                        "full-stack", 1000,
-                                    ]}
-                                    repeat={Infinity}
-                                    speed={20}
-                                    cursor={false}
-                                    wrapper="span"
-                                />
-                                <span> developer.</span>
-                            </motion.h2>
-                            {paragraphs.map((para, index) => {
-                                return (
-                                    <motion.p 
-                                        key={index} 
-                                        variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} 
-                                        transition={{ duration: 0.8, delay: index * 0.3 }}
-                                        className="mt-4 text-white/70"
-                                    >
-                                        {para}
-                                    </motion.p>
-                                )  
-                            })}
-                        </motion.div>
-                    </motion.div>
-                    
-                </div>
-
-                {/* Professional Section */}
-                <div id="professional" className="w-full py-12">
-                    <p className="mt-4">This is the Professional Experience section content.</p>
-                </div>
-
-                {/* Hobbies Section */}
-                <div id="hobbies" className="w-full py-12">
-                    <p className="mt-4">This is the Hobbies & Interests section content.</p>
-                </div>
-
+                <motion.div
+                    key={activeAboutMeType} // Ensures animation triggers on section change
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }}
+                    className="flex flex-col xl:flex-row items-center xl:items-start xl:px-6 gap-12 w-full"
+                >
+                    {activeAboutMeType === "bio" ? (
+                        <>
+                            {/* Autobiography Section */}
+                            <div className="w-full flex flex-col items-center py-12">
+                                <Autobiography />
+                            </div>
+                        </>
+                    ) : activeAboutMeType === "professional" ? (
+                        <>
+                            {/* Professional Section */}
+                            <div className="w-full py-12">
+                                <Professional />
+                            </div>
+                        </>
+                    ) : (
+                        <>
+                            {/* Hobbies Section */}
+                            <div className="w-full py-12">
+                                <Hobbies />
+                            </div>
+                        </>
+                    )}
+                </motion.div>
             </div>
         </>
     )
