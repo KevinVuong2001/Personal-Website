@@ -10,7 +10,7 @@ import { TbSql } from "react-icons/tb"
 const experience = {
     title: 'My Experience',
     description: 
-        `Explore my professional experiences, where I’ve combined technical expertise with innovative problem-solving to deliver impactful solutions, 
+        `Explore my experiences, where I’ve combined technical expertise with innovative problem-solving to deliver impactful solutions, 
         my journey reflects a commitment to growth and making a difference through technology.`,
     items: [
         {

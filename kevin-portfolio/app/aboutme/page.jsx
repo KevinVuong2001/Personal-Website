@@ -5,7 +5,6 @@ import Image from "next/image";
 import { TypeAnimation } from 'react-type-animation';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
-import Timeline from '@/components/Timeline';
 
 // Sections
 import Autobiography from './autobiography/page';
@@ -50,6 +49,7 @@ const AboutMe = () => {
                     <div className="flex flex-col sm:flex-col xl:flex-row justify-start gap-4 w-full max-w-[600px]">
                         <Button
                             size="lg" 
+                            variant="outline"
                             className={`px-6 py-2 md:text-lg xs:text-sm font-semibold transition-all ${
                                 activeAboutMeType === "bio" ? "bg-accent text-black" : "bg-secondary text-white"
                             }`}
@@ -73,6 +73,7 @@ const AboutMe = () => {
                         </Button>
                         <Button
                             size="lg" 
+                            variant="outline"
                             className={`px-6 py-2 md:text-lg xs:text-sm font-semibold transition-all ${
                                 activeAboutMeType === "hobbies" ? "bg-accent text-black" : "bg-secondary text-white"
                             }`}
